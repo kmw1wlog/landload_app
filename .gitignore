@@ -1,0 +1,8 @@
+.next
+node_modules
+out
+android/.gradle
+android/local.properties
+android/app/build
+*.log
+.DS_Store
