@@ -1,12 +1,24 @@
 # landload_app
 
-`landload_app`는 Vercel에 자동 배포되는 Next.js 웹앱과 GitHub Actions에서 바로 다운로드 가능한 Android APK 빌드 파이프라인을 함께 갖춘 초기 프로젝트입니다.
+현재 디렉터리의 실제 앱을 그대로 반영한 `landload_app` 저장소입니다. 이 프로젝트는 Next.js 기반 부동산 시나리오 앱으로, 사용자의 현재 집/소득/저축/목표를 입력하면 갈아타기, 비교 후보, 커뮤니티 맥락, 공공데이터 기반 흐름을 함께 탐색할 수 있습니다.
+
+## 앱 개요
+
+- `app/onboarding`: 사용자 목표, 소득, 현재 집, 미래 계획 입력
+- `app/feed`: 실거래/구매력 기반 추천 피드
+- `app/my-home`: 주소 정규화, 거래 시드, 현재 집 가치 흐름
+- `app/community`: 지역별 단지 커뮤니티/댓글/랭킹
+- `app/broker`: 중개사 리드/매물 관리
+- `app/demo-submission`: 발표용 데모 플로우
+- `app/api/*`: discovery, brokerage, community, public-data, security API
 
 ## 기술 스택
 
-- Next.js + TypeScript
-- Capacitor + Android
-- GitHub Actions artifact 배포
+- Next.js 15 + TypeScript
+- Prisma + SQLite 개발 DB
+- Vitest / Playwright
+- Capacitor Android
+- GitHub Actions APK artifact 업로드
 
 ## 로컬 실행
 
@@ -17,13 +29,13 @@ npm run cap:sync
 npm run android:debug-apk
 ```
 
-## 스크립트
+## 주요 스크립트
 
-- `npm run build`: Next.js production build 및 정적 export 생성
-- `npm run export`: 정적 export 생성
+- `npm run build`: Next.js production build
 - `npm run android:init`: Android 프로젝트가 없으면 생성
-- `npm run cap:sync`: Capacitor Android 동기화
-- `npm run android:debug-apk`: Android debug APK 빌드
+- `npm run cap:prepare`: Capacitor용 최소 웹 자산 생성
+- `npm run cap:sync`: Capacitor Android sync
+- `npm run android:debug-apk`: Android debug APK 생성
 
 ## APK 다운로드 방법
 
@@ -32,8 +44,10 @@ npm run android:debug-apk
 3. 최신 `android-build` 실행을 클릭합니다.
 4. `Artifacts`에서 `landload-debug-apk`를 다운로드합니다.
 
-## 배포 메모
+## 주의 사항
 
-- Vercel은 `main` 브랜치 푸시를 감지해 웹앱을 배포합니다.
-- APK는 Vercel이 아니라 GitHub Actions에서 생성됩니다.
-- Android 빌드는 `.github/workflows/android-build.yml`에서 수행됩니다.
+- 웹앱 본체는 Vercel에 배포된 Next.js 앱입니다.
+- APK는 Capacitor Android shell이며, 실행 시 `CAPACITOR_APP_URL`에 지정된 웹앱 주소를 엽니다.
+- 현재 Vercel 배포 보호가 켜져 있으면 APK와 외부 브라우저에서 `401`이 발생할 수 있습니다. 이 경우 Vercel 쪽 배포 보호 설정 또는 공개 도메인 설정이 필요합니다.
+- 저장소에는 현재 앱 소스가 포함되어 있으며, `npm install` 시 필요한 파일이 자동으로 복원됩니다.
+- GitHub Actions는 APK artifact 생성용이며, 다운로드는 `Actions > android-build > Artifacts > landload-debug-apk`에서 할 수 있습니다.
