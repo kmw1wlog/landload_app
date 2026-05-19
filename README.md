@@ -49,5 +49,5 @@ npm run android:debug-apk
 - 웹앱 본체는 Vercel에 배포된 Next.js 앱입니다.
 - APK는 Capacitor Android shell이며, 실행 시 `CAPACITOR_APP_URL`에 지정된 웹앱 주소를 엽니다.
 - 현재 Vercel 배포 보호가 켜져 있으면 APK와 외부 브라우저에서 `401`이 발생할 수 있습니다. 이 경우 Vercel 쪽 배포 보호 설정 또는 공개 도메인 설정이 필요합니다.
-- 저장소에는 현재 앱 소스가 포함되어 있으며, `npm install` 시 필요한 파일이 자동으로 복원됩니다.
+- 저장소에는 현재 앱 소스가 직접 포함되어 있습니다.
 - GitHub Actions는 APK artifact 생성용이며, 다운로드는 `Actions > android-build > Artifacts > landload-debug-apk`에서 할 수 있습니다.
