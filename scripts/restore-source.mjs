@@ -5,7 +5,7 @@ import path from "node:path";
 const cwd = process.cwd();
 const archivePath = path.join(cwd, "app-source.tgz");
 const chunkFiles = readdirSync(cwd)
-  .filter((name) => /^app-source\.tgz\.b64\.part-\d+$/.test(name))
+  .filter((name) => /^app-source\.tgz\.b64\.part-\d{3}$/.test(name))
   .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 const requiredPaths = [
   "app/onboarding/page.tsx",
